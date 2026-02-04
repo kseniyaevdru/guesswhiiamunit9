@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess Who I Am</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Guess Who I Am!</h1>
+
+        <!-- Setup Screen for game generation -->
+        <div id="setupScreen" class="game-screen">
+            <h2>Start a New Game</h2>
+            
+            <p style="margin-top: 30px;">Select images for cards (at least 2 required for this game mode):</p>
+            <div id="imageSelection" class="image-selector">
+                <!-- Image checkboxes will be generated here by JS -->
+            </div>
+            <p id="imageSelectionError" class="error-message" style="display: none;">Please select at least 2 images to start the game.</p>
+
+            <button id="generateGameBtn" class="action-button primary-button" style="margin-top: 30px;" disabled>Generate Game</button>
+
+            <div id="gameLinks" style="display: none; margin-top: 30px; text-align: left;">
+                <h3>Game Links:</h3>
+                <p>Copy and open each link on a separate device.</p>
+                <div id="linksList">
+                    <!-- Links will be generated here -->
+                </div>
+                <button id="restartSetupBtn" class="action-button secondary-button" style="margin-top: 20px;">Start Over</button>
+            </div>
+        </div>
+
+        <!-- Game Screen (visible after opening a generated link) -->
+        <div id="gameScreen" class="game-screen" style="display: none;">
+            <div class="player-boards">
+                <div class="board opponent-board">
+                    <h2>OPPONENT'S CARD</h2>
+                    <div class="card opponent-card">
+                        <img id="opponentCardImage" src="" alt="Opponent's card">
+                    </div>
+                </div>
+
+                <div class="board my-board">
+                    <h2>YOUR CARD</h2>
+                    <div class="card my-card">
+                        <span id="myCardQuestion">?</span>
+                        <!-- Actual image for my card, revealed on teacher's command or by pressing a dedicated button -->
+                        <img id="myCardActualImage" src="" alt="Your card" style="display: none;"> 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
