@@ -7,6 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const gameLinks = document.getElementById('gameLinks');
     const linksList = document.getElementById('linksList');
     const restartSetupBtn = document.getElementById('restartSetupBtn');
+    
+    // --- НОВЫЕ ЭЛЕМЕНТЫ ДЛЯ ИНСТРУКЦИЙ ---
+    const gameInstructionsInput = document.getElementById('gameInstructions');
+    const instructionArea = document.getElementById('instructionArea');
+    const instructionText = document.getElementById('instructionText');
 
     // Fixed to 2 players
     const numPlayersInGame = 2; 
@@ -71,10 +76,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const myCardFromUrl = urlParams.get('myCard');
     const opponentCardFromUrl = urlParams.get('opponentCard');
+    
+    // --- ЧТЕНИЕ ИНСТРУКЦИЙ ИЗ URL ---
+    const instructionsFromUrl = urlParams.get('instructions');
 
     if (myCardFromUrl && opponentCardFromUrl) {
         setupScreen.style.display = 'none';
         gameScreen.style.display = 'block';
+        
+        // Показываем инструкции, если они есть
+        if (instructionsFromUrl) {
+            instructionArea.style.display = 'block';
+            instructionText.innerText = instructionsFromUrl;
+        }
+
         opponentCardImage.src = opponentCardFromUrl;
         opponentCardImage.alt = "Opponent's card: " + opponentCardFromUrl;
         myCardActualImage.src = myCardFromUrl; // Still setting src for potential future reveal mechanism
@@ -93,6 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
              return;
         }
 
+        // Получаем текст инструкций
+        const instructionsVal = gameInstructionsInput.value.trim();
+
         const shuffledImages = selectedImages.sort(() => Math.random() - 0.5);
 
         linksList.innerHTML = ''; // Clear previous links
@@ -106,7 +124,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const opponentCardIndex = (i + 1) % numPlayersInGame;
             const opponentCard = shuffledImages[opponentCardIndex];
 
-            const playerGameUrl = `${baseUrl}?myCard=${encodeURIComponent(myCard)}&opponentCard=${encodeURIComponent(opponentCard)}`;
+            // Формируем базовый URL
+            let playerGameUrl = `${baseUrl}?myCard=${encodeURIComponent(myCard)}&opponentCard=${encodeURIComponent(opponentCard)}`;
+            
+            // Если есть инструкции, добавляем их в URL
+            if (instructionsVal) {
+                playerGameUrl += `&instructions=${encodeURIComponent(instructionsVal)}`;
+            }
 
             const linkItemDiv = document.createElement('div');
             linkItemDiv.classList.add('link-item');
