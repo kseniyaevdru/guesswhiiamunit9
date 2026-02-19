@@ -5,6 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guess Who I Am</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Добавим немного встроенных стилей для нового блока, 
+         чтобы он выделялся (как заметка или доска) -->
+    <style>
+        .input-group {
+            margin: 20px 0;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        #gameInstructions {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: inherit;
+            resize: vertical;
+        }
+        
+        /* Стили для отображения фраз в игре */
+        .instruction-box {
+            background-color: #fff3cd; /* Светло-желтый фон, как стикер */
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .instruction-box h3 {
+            margin: 0 0 5px 0;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+    </style>
 </head>
 <body>
     <div class="game-container">
@@ -14,7 +55,13 @@
         <div id="setupScreen" class="game-screen">
             <h2>Start a New Game</h2>
             
-            <p style="margin-top: 30px;">Select images for cards (at least 2 required for this game mode):</p>
+            <!-- НОВОЕ: Поле для ввода фраз -->
+            <div class="input-group">
+                <label for="gameInstructions">Phrases / Instructions for students:</label>
+                <textarea id="gameInstructions" rows="3" placeholder="Example: Is it a boy? Does he have glasses? Is she happy?"></textarea>
+            </div>
+
+            <p style="margin-top: 20px;">Select images for cards (at least 2 required for this game mode):</p>
             <div id="imageSelection" class="image-selector">
                 <!-- Image checkboxes will be generated here by JS -->
             </div>
@@ -34,6 +81,13 @@
 
         <!-- Game Screen (visible after opening a generated link) -->
         <div id="gameScreen" class="game-screen" style="display: none;">
+            
+            <!-- НОВОЕ: Блок, где ученики увидят ваши фразы -->
+            <div id="instructionArea" class="instruction-box" style="display: none;">
+                <h3>Useful Phrases:</h3>
+                <div id="instructionText"></div>
+            </div>
+
             <div class="player-boards">
                 <div class="board opponent-board">
                     <h2>OPPONENT'S CARD</h2>
