@@ -63,10 +63,6 @@ body::after {
     width: 90%;
     z-index: 1;
     border: 5px solid #ffcc00;
-    /* Убрано min-height и display:flex, чтобы контейнер подстраивался по высоте */
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* justify-content: space-between; */
 }
 
 h1 {
@@ -83,8 +79,6 @@ h1 {
     border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     border: 3px solid #ffcc00;
-    /* Убрано flex-grow, чтобы не растягивался */
-    /* flex-grow: 1; */ 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -100,6 +94,70 @@ h1 {
     color: #555;
     margin-bottom: 20px;
     font-size: 1.1em;
+}
+
+/* --- СТИЛИ ДЛЯ ПОЛЯ ВВОДА ИНСТРУКЦИЙ (НОВОЕ) --- */
+.input-group {
+    margin: 20px auto;
+    text-align: left;
+    max-width: 100%;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+    font-size: 1.2em;
+}
+
+#gameInstructions {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1em;
+    background-color: #fdfdfd;
+    resize: vertical; /* Можно менять высоту, но не ширину */
+    transition: border-color 0.3s ease;
+}
+
+#gameInstructions:focus {
+    outline: none;
+    border-color: #ff9933;
+    background-color: #fff;
+}
+
+/* --- СТИЛИ ДЛЯ ОТОБРАЖЕНИЯ ИНСТРУКЦИЙ В ИГРЕ (НОВОЕ) --- */
+.instruction-box {
+    background-color: #fff8e1; /* Светло-желтый фон, как стикер */
+    border: 2px dashed #ffe082;
+    color: #333;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.instruction-box h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+    color: #ff8f00;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#instructionText {
+    font-size: 1.3rem;
+    font-weight: bold;
+    line-height: 1.5;
+    white-space: pre-wrap; /* Сохраняет переносы строк из поля ввода */
+    word-wrap: break-word;
 }
 
 /* Image Selector styles */
@@ -258,11 +316,11 @@ h1 {
     margin-bottom: 5px;
 }
 
-.link-item .link-wrapper { /* Новый оберточный div для ссылки */
+.link-item .link-wrapper {
     display: flex;
-    flex-direction: column; /* Ссылка и кнопка в колонку */
+    flex-direction: column; 
     width: 100%;
-    margin-bottom: 10px; /* Отступ между ссылкой+кнопкой и следующим link-item */
+    margin-bottom: 10px;
 }
 
 .link-item a {
@@ -271,12 +329,10 @@ h1 {
     overflow-wrap: break-word;
     text-decoration: none;
     font-size: 0.9em;
-    /* flex-grow: 1; */ /* Убрано */
-    /* min-width: 150px; */ /* Убрано */
     line-height: 1.4;
-    display: block; /* Ссылка будет блочным элементом, занимая всю ширину */
-    max-width: 100%; /* Ограничиваем максимальную ширину */
-    margin-bottom: 5px; /* Отступ между ссылкой и кнопкой */
+    display: block; 
+    max-width: 100%; 
+    margin-bottom: 5px; 
 }
 
 .link-item a:hover {
@@ -295,7 +351,7 @@ h1 {
     cursor: pointer;
     transition: background-color 0.3s ease;
     flex-shrink: 0;
-    align-self: flex-start; /* Выравнивание кнопки по левому краю */
+    align-self: flex-start; 
 }
 .copy-button:hover {
     background: linear-gradient(to right, #5cb8e6, #2d89e0);
